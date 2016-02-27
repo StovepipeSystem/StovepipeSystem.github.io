@@ -4,13 +4,13 @@ title: About
 permalink: /about/
 ---
 
-#About The Project
+## About The Project
 
 “[Stovepipe system](https://en.wikipedia.org/wiki/Stovepipe_system): A barely maintainable assemblage of ill-related components” (Wikipedia)
 
 While we all love the old industrial designs with thousands of chimney rising up in the sky, I think we can agree that this is exactly what we don’t want in software. This blog is about designing systems to avoid those cases. We will explore good practices and designs through C, C++ and C# and look at what can be done to improve our life as software developers both hobbyists and professionals. I hope you will like your journey through this blog.
 
-#About The Author
+## About The Author
 
 Hi folks!
 
