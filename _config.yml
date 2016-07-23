@@ -18,3 +18,7 @@ github_username:  Kawazoe
 
 # Build settings
 markdown: kramdown
+
+collections:
+  teaching-modern-dev:
+    output: true

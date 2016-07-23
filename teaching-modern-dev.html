@@ -1,0 +1,26 @@
+---
+layout: default
+title: Teaching Modern Dev
+permalink: /teaching-modern-dev/
+order: 0
+---
+
+<div class="wrapper">
+  <div class="home">
+
+    <h1 class="page-heading">Teaching Modern Development</h1>
+
+    <ul class="post-list">
+      {% for post in site["teaching-modern-dev"] %}
+        <li>
+          <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+          <h2>
+            <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          </h2>
+        </li>
+      {% endfor %}
+    </ul>
+
+  </div>
+</div>
