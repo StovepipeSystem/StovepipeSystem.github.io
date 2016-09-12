@@ -21,7 +21,7 @@ int Map(IEnumerable<string> allLocalData) {
 int Reduce(IEnumerable<int> allMappedData) {
     return allMappedData.Sum();
 }
-{% endhighlight%}
+{% endhighlight %}
 
 This example is too simple to understand the use of MapReduce in a non distributed system. A more appropriate example would be compressing a large amount of images. There is one operation that needs to be done close to the data, the compression, and one that needs as much information as possible, the progress report. In this example, we can clearly see that MapReduce is about nothing more than executing a task on a large amount of data and collecting results. It does not matter if the compression is run sequentially or in parallel on multiple thread.
 
