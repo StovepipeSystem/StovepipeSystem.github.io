@@ -14,7 +14,7 @@ While we all love the old industrial designs with thousands of chimney rising up
 
 Hi folks!
 
-I am a young Solution Architect from Quebec/Canada trying to preach the values of clean, SOLID code developed in an agile and value centric projects. Even at my age, I have spent over half of my life writing code. During all of those years, I played with C, C++, C#, F#, Java, Python, PHP, JavaScript, TypeScript and many, many more.
+I am a software developer from Quebec/Canada trying to preach the values of clean, SOLID code developed in an agile and value centric projects. I have spent over half of my life writing code. During all of those years, I played with C, C++, C#, F#, Java, Python, PHP, JavaScript, TypeScript and many, many more.
 
 I am a polyglot and pride myself in not only using multiple languages, but focusing on the philosophies and mentalities behind them. It is the subtle differences between a generic in C# and a template in C++, or an object in JavaScript or TypeScript that makes those languages shine. It is also those different philosophies that had me hooked on design patterns and how they get expressed in all of those different languages.
 
