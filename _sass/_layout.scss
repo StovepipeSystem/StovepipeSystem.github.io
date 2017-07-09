@@ -240,3 +240,13 @@
         }
     }
 }
+
+.post-footnotes {
+    border-top: 1px solid $grey-color-light;
+    padding-top: 30px;
+    color: $grey-color;
+
+    ol {
+        margin-bottom: 0;
+    }
+}
