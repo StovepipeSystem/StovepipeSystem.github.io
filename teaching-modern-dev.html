@@ -11,7 +11,7 @@ order: 0
     <h1 class="page-heading">Teaching Modern Development</h1>
 
     <ul class="post-list">
-      {% for post in site["teaching-modern-dev"] %}
+      {% for post in site["teaching-modern-dev"] reversed %}
         <li>
           <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
