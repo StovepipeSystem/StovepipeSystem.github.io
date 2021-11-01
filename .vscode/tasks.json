@@ -8,22 +8,23 @@
 
 // Starts the Jekyll server
 {
-    "version": "0.1.0",
+    "version": "2.0.0",
     "command": "bundle",
     "tasks": [
         {
-            "taskName": "serve",
-            "suppressTaskName": true,
-            "isBuildCommand": true,
+            "label": "serve",
+            "type": "shell",
+            "command": "bundle",
             "args": [
                 "exec",
                 "jekyll",
                 "serve",
                 "--safe"
             ],
-            "isWatching": true
+            "isBackground": true,
+            "problemMatcher": [],
+            "group": "build"
         }
     ],
-    "isShellCommand": true,
     "promptOnClose": false
 }
