@@ -24,6 +24,18 @@
             "isBackground": true,
             "problemMatcher": [],
             "group": "build"
+        },
+        {
+            "label": "update",
+            "type": "shell",
+            "command": "bundle",
+            "args": [
+                "update",
+                "github-pages"
+            ],
+            "isBackground": true,
+            "problemMatcher": [],
+            "group": "build"
         }
     ],
     "promptOnClose": false
