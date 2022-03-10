@@ -25,6 +25,12 @@
             {% include icon-twitter.html username=site.twitter_username %}
           </li>
           {% endif %}
+
+          {% if site.discord_server and site.discord_invite %}
+          <li>
+            {% include icon-discord.html invite=site.discord_invite server=site.discord_server %}
+          </li>
+          {% endif %}
         </ul>
       </div>
 
