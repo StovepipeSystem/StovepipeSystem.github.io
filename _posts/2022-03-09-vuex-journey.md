@@ -111,7 +111,7 @@ export const store = createStore<any>({
         Loading users...
     </div>
     <ul v-else-if="users.status === 'resolved'">
-        <li v-for="user in users">{{user.name}}</li>
+        <li v-for="user in users.value">{{user.name}}</li>
     </div>
     <div v-else>
         Something bad happened!
