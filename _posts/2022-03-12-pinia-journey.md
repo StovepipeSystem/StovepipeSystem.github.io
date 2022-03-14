@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "My ~~Vuex~~ Pinia Journey"
+title:  "My Pinia Journey (contd. from My Vuex Journey)"
 date:   2022-03-12 23:30:00 -0500
 categories:
 ---
