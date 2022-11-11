@@ -1,0 +1,110 @@
+<div class="search-bar hidden">
+  <div class="search-inputs">
+    <label for="{{ include.id }}">
+      {% include icon-search.svg %}
+    </label>
+    <div class="search-query">
+      <input class="search-query-hint" type="search">
+      <input class="search-query-input" id="{{ include.id }}" type="search" placeholder="title, content, ...">
+    </div>
+  </div>
+</div>
+
+<script>
+  onloadFns.push(() => {
+    const [searchBarEl] = document.getElementsByClassName('search-bar');
+    const [searchHintEl, searchInputEl] = document.getElementsByTagName('input');
+    const [filteredEl] = document.getElementsByClassName('{{include.filter-class}}');
+
+    const asm = window['azure-search-emulator'];
+    if (asm) {
+      searchBarEl.classList.remove('hidden');
+    }
+
+    const emulator = new asm.Emulator();
+
+    const postsSchema = [
+      { type: 'Edm.String', key: true, name: 'id', facetable: false },
+      { type: 'Edm.String', name: 'title', facetable: false },
+      { type: 'Edm.DateTimeOffset', name: 'publishedOn', facetable: false },
+      { type: 'Edm.String', name: 'prettyPublishedOn', facetable: false },
+      { type: 'Edm.String', name: 'url', facetable: false },
+      { type: 'Edm.String', name: 'content', facetable: false },
+    ];
+    const postsSuggesters = [
+      { name: 'sg', searchMode: 'analyzingInfixMatching', fields: ['title', 'prettyPublishedOn', 'content'] },
+    ];
+    const postsScoringProfiles = [
+      {
+        name: 'default',
+        text: {
+          weight: {
+            title: 10,
+            prettyPublishedOn: 5,
+          },
+        },
+        functions: [
+          {
+            type: 'freshness',
+            freshness: {
+              boostingDuration: 'P365D',
+            },
+          },
+        ],
+      },
+    ];
+
+    const postsIndex = emulator.createIndex({
+      name: 'posts',
+      schema: postsSchema,
+      suggesters: postsSuggesters,
+      scoringProfiles: postsScoringProfiles,
+      defaultScoringProfile: 'default',
+    });
+
+    postsIndex.postDocuments({
+      value: indexableData,
+    });
+
+    searchInputEl.oninput = function () {
+      const searchText = searchInputEl.value;
+      const autocompleteResults = postsIndex.autocomplete({ suggesterName: 'sg', search: searchText, top: 1 });
+      const [firstAutocomplete] = autocompleteResults.value;
+
+      searchHintEl.value = firstAutocomplete ? firstAutocomplete.queryPlusText : '';
+
+      if (!searchText) {
+        for (const child of filteredEl.children) {
+          child.classList.remove('hidden');
+        }
+        return;
+      }
+
+      const suggesterResults = postsIndex.suggest({ suggesterName: 'sg', search: searchText, top: 20 });
+      const uniqueSuggestions = uniq(suggesterResults.value, r => r.id);
+
+      for (const child of filteredEl.children) {
+        const searchId = child.dataset.searchId;
+        const match = uniqueSuggestions.find(s => s.id === searchId);
+
+        if (match) {
+          child.classList.remove('hidden');
+        } else {
+          child.classList.add('hidden');
+        }
+      }
+    }
+  });
+
+  function uniq(source, keySelector) {
+    const results = {};
+    for (const val of source) {
+      const key = keySelector(val);
+      if (results[key]) {
+        continue;
+      }
+      results[key] = val;
+    }
+    return Object.values(results);
+  }
+</script>

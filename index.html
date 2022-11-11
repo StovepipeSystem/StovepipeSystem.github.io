@@ -5,11 +5,11 @@ layout: default
 <div class="wrapper">
   <div class="home">
 
-    <h1 class="page-heading">Posts</h1>
+    <h1 class="page-heading">Posts {% include search.html id="posts-search" filter-class="post-list" %}</h1>
 
     <ul class="post-list">
       {% for post in site.posts %}
-        <li>
+        <li data-search-id="{{ post.id }}">
           <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
           <h2>
@@ -23,3 +23,5 @@ layout: default
 
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/azure-search-emulator-js@0.5.2/azure-search-emulator.umd.js"></script>
+<script src="/search-data.generated.js?v={{site.time | url_encode}}"></script>

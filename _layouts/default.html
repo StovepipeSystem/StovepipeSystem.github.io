@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
   {% include head.html %}
 
   <body>
+    <script>
+      var onloadFns = [];
+    </script>
 
     {% include header.html %}
 
@@ -13,6 +16,9 @@
 
     {% include footer.html %}
 
+    <script>
+      window.onload = function () { onloadFns.forEach(function (fn) { fn(); }); }
+    </script>
   </body>
 
 </html>

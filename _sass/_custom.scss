@@ -12,3 +12,65 @@
 .icon+.label {
     margin-left: 0.25rem;
 }
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+
+    @include media-query($on-palm) {
+        flex-direction: column;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+$search-input-height: 30px;
+$search-input-width: 16rem;
+.search-inputs {
+    display: flex;
+
+    @include media-query($on-palm) {
+        margin-top: 0.5rem;
+    }
+
+    label {
+        height: $search-input-height;
+        margin-right: 0.5rem;
+
+        svg {
+            $diff: 10px;
+            height: $search-input-height - $diff;
+            padding-top: $diff / 2;
+            fill: $grey-color;
+        }
+    }
+    input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: $search-input-height;
+        width: $search-input-width;
+        font-size: 1rem;
+        border: solid 2px #828282;
+        border-radius: 1rem;
+        padding: 0.25rem 0.75rem;
+
+        &.search-query-hint {
+            border-color: transparent;
+            color: $grey-color;
+        }
+        &.search-query-input {
+            background: transparent;
+        }
+    }
+    .search-query {
+        position: relative;
+        width: $search-input-width;
+    }
+}
+
+.search-bar.hidden {
+    display: none;
+}
