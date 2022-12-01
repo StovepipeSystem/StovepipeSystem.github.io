@@ -4,7 +4,7 @@
       {% include icon-search.svg %}
     </label>
     <div class="search-query">
-      <input class="search-query-hint" type="search">
+      <input class="search-query-hint" type="search" disabled="disabled">
       <input class="search-query-input" id="{{ include.id }}" type="search" placeholder="title, content, ...">
     </div>
   </div>
@@ -24,11 +24,11 @@
     const emulator = new asm.Emulator();
 
     const postsSchema = [
-      { type: 'Edm.String', key: true, name: 'id', facetable: false },
+      { type: 'Edm.String', key: true, name: 'id', facetable: false, analyzer: 'keyword' },
       { type: 'Edm.String', name: 'title', facetable: false },
       { type: 'Edm.DateTimeOffset', name: 'publishedOn', facetable: false },
-      { type: 'Edm.String', name: 'prettyPublishedOn', facetable: false },
-      { type: 'Edm.String', name: 'url', facetable: false },
+      { type: 'Edm.String', name: 'prettyPublishedOn', facetable: false, analyzer: 'whitespace' },
+      { type: 'Edm.String', name: 'url', facetable: false, analyzer: 'pattern' },
       { type: 'Edm.String', name: 'content', facetable: false },
     ];
     const postsSuggesters = [
@@ -46,6 +46,8 @@
         functions: [
           {
             type: 'freshness',
+            fieldName: 'publishedOn',
+            boost: 3,
             freshness: {
               boostingDuration: 'P365D',
             },
@@ -68,7 +70,7 @@
 
     searchInputEl.oninput = function () {
       const searchText = searchInputEl.value;
-      const autocompleteResults = postsIndex.autocomplete({ suggesterName: 'sg', search: searchText, top: 1 });
+      const autocompleteResults = postsIndex.autocomplete({ suggesterName: 'sg', search: searchText, autocompleteMode: 'oneTermWithContext', top: 1 });
       const [firstAutocomplete] = autocompleteResults.value;
 
       searchHintEl.value = firstAutocomplete ? firstAutocomplete.queryPlusText : '';
@@ -80,8 +82,8 @@
         return;
       }
 
-      const suggesterResults = postsIndex.suggest({ suggesterName: 'sg', search: searchText, top: 20 });
-      const uniqueSuggestions = uniq(suggesterResults.value, r => r.id);
+      const suggestionResults = postsIndex.suggest({ suggesterName: 'sg', search: searchText, top: 20 });
+      const uniqueSuggestions = uniq(suggestionResults.value, r => r.id);
 
       for (const child of filteredEl.children) {
         const searchId = child.dataset.searchId;

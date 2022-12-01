@@ -2,11 +2,11 @@
   <library name="azure-search-emulator-js" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_npm_azure-search-emulator-js@0.5.2_azure-search-emulator.umd.js" />
+        <item url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_npm_azure-search-emulator-js@0.6.1_azure-search-emulator.umd.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_npm_azure-search-emulator-js@0.5.2_azure-search-emulator.umd.js" />
+      <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdn.jsdelivr.net_npm_azure-search-emulator-js@0.6.1_azure-search-emulator.umd.js" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
