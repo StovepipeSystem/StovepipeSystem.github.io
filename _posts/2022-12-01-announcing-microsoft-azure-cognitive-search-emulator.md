@@ -6,30 +6,39 @@ categories:
 ---
 
 ## About Azure Cognitive Search
-Microsoft Azure is a cloud service that generally provides an amazing development experience. Contrary to competitors
-like AWS or GCP, a large amount of their services can be easily mocked or replaced with local variants to help you
-iterate on your code quickly, without the overhead and costs of deploying to the cloud every time to test your code.
-This is especially notable for users of Azure AppService, Azure Functions, Azure CosmosDB, Azure SQL, and Azure Storage.
+[Microsoft Azure](https://azure.microsoft.com/en-us/) is a cloud service that generally provides an amazing development
+experience. Contrary to competitors like AWS or GCP, a large amount of their services can be easily mocked or replaced
+with local variants to help you iterate on your code quickly, without the overhead and costs of deploying to the cloud
+every time to test your code. This is especially notable for users of
+[Azure AppService](https://azure.microsoft.com/en-us/products/app-service/#overview),
+[Azure Functions](https://azure.microsoft.com/en-us/products/functions/#overview),
+[Azure CosmosDB](https://azure.microsoft.com/en-us/products/cosmos-db/#overview),
+[Azure SQL](https://azure.microsoft.com/en-us/products/azure-sql/database/#overview),
+and [Azure Storage](https://azure.microsoft.com/en-us/products/category/storage/).
 These five services alone already cover a very large portion of what developers want out of a cloud provider: WebSite
 hosting, Serverless hosting, NoSQL databases, SQL databases, and unstructured storage. For each of those services,
 Microsoft already offer great solutions for local development. Sometimes, they are even cross-platform.
 
-You have the dotnet Kestrel web server which runs on every platform and let you test your ASP.NET applications quickly
-before they end up on AppService.
+You have the [dotnet Kestrel web server](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel)
+which runs on every platform and let you test your ASP.NET applications quickly before they end up on AppService.
 
-You have the Azure Functions Core Tools which lets you emulate the whole Azure Functions platform in a single command
-line, including support for Durable Functions.
+You have the [Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local)
+which lets you emulate the whole Azure Functions platform in a single command line, including support for
+[Durable Functions](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview).
 
-You have the CosmosDB emulator that can simulate the entire set of supported APIs from the cloud service of the same
-name with very little configuration (with a linux version in preview that supports the SQL and MongoDB APIs).
+You have the [CosmosDB emulator](https://learn.microsoft.com/en-us/azure/cosmos-db/local-emulator) that can simulate the
+entire set of supported APIs from the cloud service of the same name with very little configuration (with a linux
+version in preview that supports the SQL and MongoDB APIs).
 
-You have SQL Server which has a free version that can be installed on your machine for testing, and I believe that is
-also available on linux.
+You have [SQL Server Express LocalDB](https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/sql-server-express-localdb)
+which has a free version that can be installed on your machine for testing, and I believe that also have an equivalent
+available on linux.
 
-And finally, you have Azurite, the Azure Storage emulator, that is also cross-platform and support all forms of
-unstructured storage.
+And finally, you have [Azurite](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azurite), the Azure
+Storage emulator, that is also cross-platform and support all forms of unstructured storage.
 
-You might have noticed that, so far, there's one conspicuously missing server from this list... *Azure Cognitive Search*.
+You might have noticed that, so far, there's one conspicuously missing server from this list...
+[Azure Cognitive Search](https://azure.microsoft.com/en-us/products/search/#overview)
 
 For some reason, Microsoft have yet to provide an emulator for their very powerful search index; even just a limited one.
 There are a couple of low-key open source emulators available out there. They however either have massive dependencies
@@ -68,30 +77,33 @@ which completely excludes two massive sides of the market:
 
 ## Introducing Azure Cognitive Search Emulator JS
 A boring name, I know, but trust me, this is bigger than it looks. This package aims at replicating the entirety of the
-official Azure Cognitive Search API for structured data. The goal here is that everything that can be done with the
-official JavaScript client should be doable while targeting the emulator. In theory, that should be the same goal as
-every other emulator out there. The key is how I approached it to fix every single one of the previous issues I've
-mentioned.
+official [Azure Cognitive Search API](https://learn.microsoft.com/en-us/rest/api/searchservice/) for structured data.
+The goal here is that everything that can be done with the official JavaScript client should be doable while targeting
+the emulator. In theory, that should be the same goal as every other emulator out there. The key is how I approached it
+to fix every single one of the previous issues I've mentioned.
 
-First, this emulator is built in TypeScript. This means that you can either front it with an ExpressJs server in Node,
-or you can embed it directly into your web application. Yes, it can run in the browser. This is a huge opportunity for
-people with static sites that needs a quick search capability. With just a bit of javascript, you can preload your
-index when the page loads from known documents and hook the emulator to a search field. You could also use the emulator
-for local development to avoid the costs and complexities of managing an instance of Azure Cognitive Search in your dev
-environment. This is ideal when you need to spin-up a quick demo version of your app, again with a predefined index, and
-trivial to setup with tools like MirageJs.
+First, this emulator is built in [TypeScript](https://www.typescriptlang.org/). This means that you can either front it
+with an [ExpressJs](https://expressjs.com/) server in [NodeJs](https://nodejs.org/), or you can embed it directly into
+your web application. Yes, it can run in the browser. This is a huge opportunity for people with static sites that needs
+a quick search capability. With just a bit of javascript, you can preload your index when the page loads from known
+documents and hook the emulator to a search field. You could also use the emulator for local development to avoid the
+costs and complexities of managing an instance of Azure Cognitive Search in your dev environment. This is ideal when you
+need to spin-up a quick demo version of your app, again with a predefined index, and trivial to setup with tools like
+[MirageJs](https://miragejs.com/).
 
 Second, this emulator focuses on APIs that have an impact on your code. It provides every single functionality that
 might impact the structure of the queries and responses that you create, while de-prioritizing features that are mostly
-user facing. For instance, while it is planned to have support for the full Lucene query syntax, right now, only the
-simple query syntax is supported. This is fine though since Lucene is designed as a syntax for end users to manipulate,
-and not for you to generate from a prompt. Lucene let you search for `bil*`, `price: !free`, or `wooden matches~1` and
-expect end-users to know what those operators are. There is definitely a reason why Lucene exists, and also why your
-end-users want it, even if they never heard the name. However, we, developers, can live with limited queries in a dev
-environment at least for a while. What we cannot live without, is features that can impact the entire architecture of
-our code, like complex types, location-based queries, suggestions and autocompletion, all things that changes how you
-design and write your application. This is why everything listed here is supported right now in the emulator. As long as
-you let your users type in they own query, the full lucene syntax can come later.
+user facing. For instance, while it is planned to have support for the
+[full Lucene query syntax](https://learn.microsoft.com/en-us/azure/search/query-lucene-syntax), right now, only the
+[simple query syntax](https://learn.microsoft.com/en-us/azure/search/query-simple-syntax) is supported. This is fine
+though since Lucene is designed as a syntax for end users to manipulate, and not for you to generate from a prompt.
+Lucene let you search for `bil*`, `price: !free`, or `wooden matches~1` and expect end-users to know what those
+operators are. There is definitely a reason why Lucene exists, and also why your end-users want it, even if they never
+heard the name. However, we, developers, can live with limited queries in a dev environment at least for a while. What
+we cannot live without, is features that can impact the entire architecture of our code, like complex types,
+location-based queries, suggestions and autocompletion, all things that changes how you design and write your application.
+This is why everything listed here is supported right now in the emulator. As long as you let your users type in they
+own query, the full lucene syntax can come later.
 
 Third, this emulator helps you quickly iterate over your index's design. With a near zero spin-up time, you can quickly
 change the structure of your index, and in fact, have multiple indices running at the same time in the same emulator,
@@ -102,7 +114,7 @@ emulator, it should work as expected when you move it to the official Azure Sear
 
 ## I want in!
 If you're still reading at this point, then this is probably a tool you want in your arsenal. There's a demo, right here
-at the top of the homepage of this very blog, and you can find the package and a ton more info over at
-https://www.npmjs.com/package/azure-search-emulator-js .
+at the top of the homepage of this very blog, and you can find the package and a ton more info over
+[on NPM](https://www.npmjs.com/package/azure-search-emulator-js).
 
 For now, that's all I have for you. Read you later!
