@@ -12,6 +12,14 @@
 .icon+.label {
     margin-left: 0.25rem;
 }
+.icon.icon--small > svg {
+    width: 16px;
+    height: 16px;
+}
+
+.hidden {
+    display: none;
+}
 
 .page-heading {
     display: flex;
@@ -20,10 +28,6 @@
     @include media-query($on-palm) {
         flex-direction: column;
     }
-}
-
-.hidden {
-    display: none;
 }
 
 $search-input-height: 30px;
@@ -36,14 +40,13 @@ $search-input-width: 16rem;
     }
 
     label {
-        height: $search-input-height;
         margin-right: 0.5rem;
 
         svg {
             $diff: 10px;
+            width: $search-input-height;
             height: $search-input-height - $diff;
-            padding-top: $diff / 2;
-            fill: $grey-color;
+            padding-bottom: $diff / 3;
         }
     }
     input {

@@ -1,11 +1,11 @@
 <div class="search-bar hidden">
   <div class="search-inputs">
     <label for="{{ include.id }}">
-      {% include icon-search.svg %}
+      {% include svg-icon.html icon="far-search" %}
     </label>
     <div class="search-query">
-      <input class="search-query-hint" type="search" disabled="disabled">
-      <input class="search-query-input" id="{{ include.id }}" type="search" placeholder="title, content, ...">
+      <input class="search-query-hint" type="search" disabled="disabled" aria-description="search hint">
+      <input class="search-query-input" id="{{ include.id }}" type="search" placeholder="title, content, ..." aria-description="search">
     </div>
   </div>
 </div>

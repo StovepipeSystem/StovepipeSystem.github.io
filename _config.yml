@@ -16,10 +16,13 @@ description: > # this means to ignore newlines until "baseurl:"
   A software developement, architecture and design blog to avoid Stovepipe Systems.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://stovepipesystem.github.io" # the base hostname & protocol for your site
-twitter_username: KawazoeMasahiro
 github_username:  Kawazoe
+twitter_username: KawazoeMasahiro
+mastodon_username: kawazoe
+mastodon_instance: mstdn.ca
 discord_server: Storepipe Systems
 discord_invite: ArfwEhGETD
+linkedin_username: etienne-maheu
 
 # Build settings
 markdown: kramdown

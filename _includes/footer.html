@@ -14,23 +14,21 @@
 
       <div class="footer-col footer-col-2">
         <ul class="social-media-list">
-          {% if site.github_username %}
           <li>
-            {% include icon-github.html username=site.github_username %}
+            <a rel="me" href="https://github.com/{{ site.github_username }}">{% include svg-icon.html icon="fab-github" size="small" %}<span class="label">{{ site.github_username }}</span></a>
           </li>
-          {% endif %}
-
-          {% if site.twitter_username %}
           <li>
-            {% include icon-twitter.html username=site.twitter_username %}
+            <a rel="me" href="https://twitter.com/{{ site.twitter_username }}">{% include svg-icon.html icon="fab-twitter" size="small" %}<span class="label">{{ site.twitter_username }}</span></a>
           </li>
-          {% endif %}
-
-          {% if site.discord_server and site.discord_invite %}
           <li>
-            {% include icon-discord.html invite=site.discord_invite server=site.discord_server %}
+            <a rel="me" href="https://{{ site.mastodon_instance }}/@{{ site.mastodon_username }}">{% include svg-icon.html icon="fab-mastodon" size="small" %}<span class="label">@{{ site.mastodon_username }}@{{ site.mastodon_instance }}</span></a>
           </li>
-          {% endif %}
+          <li>
+            <a rel="me" href="https://discord.gg/{{ site.discord_invite }}">{% include svg-icon.html icon="fab-discord" size="small" %}<span class="label">{{ site.discord_server }}</span></a>
+          </li>
+          <li>
+            <a rel="me" href="https://www.linkedin.com/in/{{ site.linkedin_username }}">{% include svg-icon.html icon="fab-linkedin" size="small" %}<span class="label">{{ site.linkedin_username }}</span></a>
+          </li>
         </ul>
       </div>
 
