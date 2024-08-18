@@ -1,0 +1,103 @@
+---
+layout: post
+title:  "Why AI is fundamentally bad"
+date:   2024-08-12 13:30:00 -0500
+categories:
+---
+
+When you look at the news today, everything is denched in "AI" and why it will change the world. There's a lot to unpack in this statement
+and today, I want to take you through a journey that will show you that not only is this statement wrong, it is fundamentally wrong; it
+can never be true.
+
+## AI isn't what you think it is
+
+First thing first, it's important that everyone understands what AI actually is. Artificial Intelligence is not a product or service. It is
+a field of Computer Science dedicated to researching how to reproduce human intelligence with a computer. When OpenAI tells you that AI will
+change the world, what you're actually seeing is a company saying the equivalent of "Civil Engineering will revolutionize how we build
+cities" while selling you a highway. They are not wrong, but I think we can all agree that there's a lot more to Civil Engineering than just
+highways.
+
+So, what is "AI"? In todays terms, AI usually means Large Language Models, or LLMs. This is a particular subset of the field dedicated to
+parsing and reproducing human languages. This familly of AI, or models, are designed to take a series of "tokens" like words in a sentence
+and output the most likely word comming up next. Running those models in an iterative fashion, taking their output and feeding it back to
+them, means that you can end up guessing the outcome of an entire discussion. Give it the ability of generating a "pause", and you now have
+the basis of a software like ChatGPT that lets you go back and forth in this discussion, giving you the illutsion of "talking" to the
+machine.
+
+It's pretty clever, and there's a lot of interesting tech like Deep Neural Networks and Transformers behind it. While I could go into the
+details of how these works, I think the Youtuber 3blue1brown did it best in its
+[neural network series](https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi). Content Warning, this is a
+maths channel, so expect a lot of very cool but complicated technicalities and a massive rabbit hole. What is really important to
+understand is that, while LLMs fall into a subset of AI called _predictors_, they aren't _mediums_. What they attempt to do is very simple,
+but the way they do it is incredibly optimized so that they get to do it at scale.
+
+As a simplification of what they do, imagine that you ask an LLM "What goes between left and right?". The LLM will then attempt to _infer_
+meaning from the text by applying various weights from its training data to the different words in the sentence. These weights have each
+of those words transformed into N-dimentional vectors that points in the direction of _the meaning of the word_. The more dimentions, the
+more meanings you can encode. In this question, you can have a dimention that corresponds to "left-ness", to "right-ness", one to
+"between-ness", and one to "question-ness". After the first pass through this process, you end up with a new sequence of meaning encoded
+by those different vectors: "between left right question". After a second pass through this process, you get to derive a deeper meaning
+like this: "answer middle". "middle" didn't come from nowhere. Instead, it happens to be a word in the N-dimentional space that lands at
+the point where _half of left_ and _half of right_ intersect. It's the same for "answer", which usually comes after a question; and so is
+where the "question" vector ends up pointing to after the second pass. What happened here is that we've mathematically encoded the idea
+of a word into a direction, and then applied that direction to another word to end up with a prediction.
+
+## Training data and copyright
+
+In the online discourse about LLMs, you'll often see people state that training an AI with non-licenced data isn't copyright infrigment.
+The argument behind this statement comes from the fact that this data is "not present" in the resulting program. The only thing left
+from this data is the "meaning" that we derived from it. This is our first forray into why AI is fundamentally bad; and funnily enough,
+it has nothing to do with copyright infrigment. Does this argument reminds you of anything? The source isn't conversed, only its meaning...
+
+Can you think of any other process where the source isn't conserved, but the idea of it is? If you think data compression, whether lossless
+or lossy, then you'd be correct! JPEG compression is a fancy mathematical tour de force that uses a standard set of patterns, like "vertical
+wave", "horizontal wave", "short horizontal wave", "diagonal wave", etc... and figures out how much of those patterns are present in a given
+picture. It then stores a weight for each of those patterns instead of the original data. You get to reconstruct the original by taking all
+patterns and multiplying them by the weights and then adding the final result together. MP3 encoding uses a similar technique but with
+sounds. The resulting file looks nothing like the original data, but once decoded usually sound very similar.
+
+So, are LLMs just a fancy compression algorithm? Well... https://arxiv.org/abs/2309.10668, oh wow! "Chinchilla 70B, while trained primarily
+on text, compresses ImageNet patches to 43.4% and LibriSpeech samples to 16.4% of their raw size, beating domain-specific compressors like
+PNG (58.5%) or FLAC (30.3%), respectively." So not only does this paper demonstrate that LLMs are a fancy form of compression algorithms,
+they even _beat_ our best classical algorithms in some scenarios. If they are compression algorithm, does this implies we can "decompress"
+ChatGPT? https://www.howtogeek.com/chatgpt-leaking-passwords-conversations/ Oh... Yes... Yes, we can...
+
+These two facts prooves that not only is the original data still "present" in the training data, it is present in a form similar to other
+compression algorithms that can be retrieved through decompression; a form that has been previously accepted by courts as "as good as the
+original", which is why you can't just compress a copyrighted song or photo and share it freely. No matter how many format "conversions"
+you get the "idea" through, it's still the same idea.
+
+### But wait, I thought you said this wasn't about copyright infringement?
+
+Copyright is built on the idea of protecting creators from people profiting of their ideas, but there's also a moral implication to this.
+What if ideas aren't protected? What if you could take anyone's idea and just re-distribute and re-sell it without consequences? What if
+you remove the insentive to create?
+
+Creating, inovating, is a very difficult and resource consuming process. In contrast, repeating what was already done is much easier. For
+a capitalist economy that optimizes for profit, it means that the most value you can extract from the least amount of resources you use
+is the best way of designing a product or service. This insentivies companies to stall inovation in favour of repeating what was already
+done. We see it all the time in
+[movies](https://www.reddit.com/r/CasualConversation/comments/8ozaiw/anyone_else_think_all_marvel_movies_are_kinda_the/),
+[music](https://www.smithsonianmag.com/smart-news/pop-music-melodies-have-gotten-simpler-over-time-180984695/),
+[videogames](https://www.youtube.com/watch?v=ChqzpHEsSWo),
+and even [vending machines](https://www.bodega.ai/). The last one follows a crase of "appification"; adding an app to every thing, like
+taxies (uber), shopping (shop from shopify), and dubious smart devices like your toaster. This isn't happening on accident. This is
+happening because it is the currenly incentivized process for generating value in the market.
+
+So the question is now: What happens when this same incentive gets applied to the fundamental process of creating medias? What happens
+when LLMs, which remembers cannot invent new things, are prefered over human creators? If an LLM suggest a piece of code to you, do you
+believe that it understands it enough to explain to you _why_ this is the best solution to your problem? Or, do you see that it only
+provided this suggestion because this is the most likely thing a human would write in this scenario? As more and more people uses LLMs
+in their day to day, more and more media will get generated as imitation. As people stop leardning from imitation, they will lose the
+ability to understand the reasoning behind why things were done in a specific way in specific scenarios. They will lose the ability to
+derive understanding from this reasoning, and they will lose the ability to make decisions outright.
+
+Is the future really this extreme? Eh, probably not. However, the present is already getting pretty close to it. There are loads of
+people, especially in the programming sphere, that believes these tools can help them ship better code faster. However, with clear
+research from companies like Microsoft, who owns OpenAI,
+[pointing towards the opposite](https://visualstudiomagazine.com/Articles/2024/01/25/copilot-research.aspx), it is clear to me that
+[posts](https://www.microsoft.com/en-us/research/publication/frustrated-with-code-quality-issues-llms-can-help/)
+[like](https://www.microsoft.com/en-us/research/publication/core-resolving-code-quality-issues-using-llms/
+[this](https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-code-quality/)
+are made up more of cargo-cult marketing than of objective facts and science. Whether we like it or not, we're definitely going in a
+direction where inovation in media (including coding) is put aside in favour of imitating what already exists as fast as possible.
