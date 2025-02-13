@@ -18,8 +18,8 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://stovepipesystem.github.io" # the base hostname & protocol for your site
 github_username:  Kawazoe
 twitter_username: KawazoeMasahiro
-mastodon_username: kawazoe
-mastodon_instance: mstdn.ca
+fedi_username: kawazoe
+fedi_instance: transfem.social
 discord_server: Storepipe Systems
 discord_invite: ArfwEhGETD
 linkedin_username: etienne-maheu
